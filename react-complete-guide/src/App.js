@@ -23,6 +23,16 @@ class App extends Component {
     });
   };
 
+  nameChangedHandler = event => {
+    this.setState({
+      Persons: [
+        { name: "Max", age: 27 },
+        { name: event.target.value, age: 4 },
+        { name: "Ivans", age: 43 }
+      ]
+    });
+  };
+
   render() {
     return (
       <div className="App">
@@ -41,6 +51,7 @@ class App extends Component {
           age={this.state.Persons[1].age}
           // passing methos refrences between components
           click={this.switchNameHandler.bind(this, "Maxwill2")}
+          changed={this.nameChangedHandler}
         >
           My Hobbies: Music{" "}
         </Person>
