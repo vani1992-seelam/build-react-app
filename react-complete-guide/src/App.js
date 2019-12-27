@@ -47,6 +47,30 @@ class App extends Component {
       padding: "8px",
       cursor: "pointer"
     };
+    var persons = null;
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          <Person
+            name={this.state.Persons[0].name}
+            age={this.state.Persons[0].age}
+          />
+          <Person
+            name={this.state.Persons[1].name}
+            age={this.state.Persons[1].age}
+            // passing methos refrences between components
+            click={this.switchNameHandler.bind(this, "Maxwill2")}
+            changed={this.nameChangedHandler}
+          >
+            My Hobbies: Music{" "}
+          </Person>
+          <Person
+            name={this.state.Persons[2].name}
+            age={this.state.Persons[2].age}
+          />
+        </div>
+      );
+    }
     return (
       <div className="App">
         <h1>Hi, I'm a React App</h1>
@@ -55,27 +79,7 @@ class App extends Component {
         <button style={style} onClick={this.togglePersonsHandler}>
           Toggle Persons
         </button>
-        {this.state.showPersons === true ? (
-          <div>
-            <Person
-              name={this.state.Persons[0].name}
-              age={this.state.Persons[0].age}
-            />
-            <Person
-              name={this.state.Persons[1].name}
-              age={this.state.Persons[1].age}
-              // passing methos refrences between components
-              click={this.switchNameHandler.bind(this, "Maxwill2")}
-              changed={this.nameChangedHandler}
-            >
-              My Hobbies: Music{" "}
-            </Person>
-            <Person
-              name={this.state.Persons[2].name}
-              age={this.state.Persons[2].age}
-            />
-          </div>
-        ) : null}
+        {persons}
       </div>
     );
   }
