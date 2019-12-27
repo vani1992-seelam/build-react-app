@@ -34,6 +34,12 @@ class App extends Component {
     });
   };
 
+  deletePersonHandler = personIndex => {
+    const persons = this.state.Persons;
+    persons.splice(personIndex, 1);
+    this.setState({ persons: persons });
+  };
+
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
     this.setState({ showPersons: !doesShow });
@@ -51,8 +57,14 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.Persons.map(person => {
-            return <Person name={person.name} age={person.age} />;
+          {this.state.Persons.map((person, index) => {
+            return (
+              <Person
+                click={() => this.deletePersonHandler(index)}
+                name={person.name}
+                age={person.age}
+              />
+            );
           })}
         </div>
       );
