@@ -51,23 +51,9 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          <Person
-            name={this.state.Persons[0].name}
-            age={this.state.Persons[0].age}
-          />
-          <Person
-            name={this.state.Persons[1].name}
-            age={this.state.Persons[1].age}
-            // passing methos refrences between components
-            click={this.switchNameHandler.bind(this, "Maxwill2")}
-            changed={this.nameChangedHandler}
-          >
-            My Hobbies: Music{" "}
-          </Person>
-          <Person
-            name={this.state.Persons[2].name}
-            age={this.state.Persons[2].age}
-          />
+          {this.state.Persons.map(person => {
+            return <Person name={person.name} age={person.age} />;
+          })}
         </div>
       );
     }
