@@ -9,7 +9,8 @@ class App extends Component {
       { name: "Tommy", age: 4 },
       { name: "Ivans", age: 28 }
     ],
-    otherState: "some other value"
+    otherState: "some other value",
+    showPersons: false
   };
 
   switchNameHandler = newName => {
@@ -33,6 +34,11 @@ class App extends Component {
     });
   };
 
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({ showPersons: !doesShow });
+  };
+
   render() {
     const style = {
       backgroundColor: "white",
@@ -46,29 +52,30 @@ class App extends Component {
         <h1>Hi, I'm a React App</h1>
         <p>Thsi is testing!</p>
         {/* alternate arrow function for binding  */}
-        <button
-          style={style}
-          onClick={() => this.switchNameHandler("Maxiwill")}
-        >
-          Switch Names
+        <button style={style} onClick={this.togglePersonsHandler}>
+          Toggle Persons
         </button>
-        <Person
-          name={this.state.Persons[0].name}
-          age={this.state.Persons[0].age}
-        />
-        <Person
-          name={this.state.Persons[1].name}
-          age={this.state.Persons[1].age}
-          // passing methos refrences between components
-          click={this.switchNameHandler.bind(this, "Maxwill2")}
-          changed={this.nameChangedHandler}
-        >
-          My Hobbies: Music{" "}
-        </Person>
-        <Person
-          name={this.state.Persons[2].name}
-          age={this.state.Persons[2].age}
-        />
+        {this.state.showPersons === true ? (
+          <div>
+            <Person
+              name={this.state.Persons[0].name}
+              age={this.state.Persons[0].age}
+            />
+            <Person
+              name={this.state.Persons[1].name}
+              age={this.state.Persons[1].age}
+              // passing methos refrences between components
+              click={this.switchNameHandler.bind(this, "Maxwill2")}
+              changed={this.nameChangedHandler}
+            >
+              My Hobbies: Music{" "}
+            </Person>
+            <Person
+              name={this.state.Persons[2].name}
+              age={this.state.Persons[2].age}
+            />
+          </div>
+        ) : null}
       </div>
     );
   }
