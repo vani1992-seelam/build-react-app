@@ -1,7 +1,21 @@
 import React, { Component } from "react";
 import "./App.css";
-import Radium, { StyleRoot } from "radium";
+import styled from "styled-components";
 import Person from "./Person/Person";
+
+const StyledButton = styled.button`
+  background-color: green;
+  color: white;
+  font: inherit;
+  border: 1px solid green;
+  padding: 8px;
+  cursor: pointer;
+
+  &:hover {
+    backgroundcolor: light green;
+    color: gray;
+  }
+`;
 
 class App extends Component {
   state = {
@@ -98,19 +112,17 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
-        <div className="App">
-          <h1>Hi, I'm a React App</h1>
-          <p className={classes.join(" ")}>This is testing!</p>
-          {/* alternate arrow function for binding  */}
-          <button style={style} onClick={this.togglePersonsHandler}>
-            Toggle Persons
-          </button>
-          {persons}
-        </div>
-      </StyleRoot>
+      <div className="App">
+        <h1>Hi, I'm a React App</h1>
+        <p className={classes.join(" ")}>This is testing!</p>
+        {/* alternate arrow function for binding  */}
+        <StyledButton onClick={this.togglePersonsHandler}>
+          Toggle Persons
+        </StyledButton>
+        {persons}
+      </div>
     );
   }
 }
 
-export default Radium(App);
+export default App;
