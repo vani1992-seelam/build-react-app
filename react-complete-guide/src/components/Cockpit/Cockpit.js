@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./Cockpit.css";
 
 const cockpit = props => {
+  useEffect(() => {
+    console.log("[cockpit.js] useEffect");
+    //HTTP request.....
+    setTimeout(() => {
+      alert("Saved!!");
+    }, 1000);
+  }, []);
+
+  //[props.persons] == when the prsons will change.
+  //[] == pass empty array (if you want to use for the frst time)
+
   const assignedClasses = [];
   let btnClass = " ";
   if (props.showPersons) {
