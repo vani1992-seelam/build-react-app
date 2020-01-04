@@ -5,13 +5,24 @@ const cockpit = props => {
   useEffect(() => {
     console.log("[cockpit.js] useEffect");
     //HTTP request.....
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       alert("Saved!!");
     }, 1000);
+    return () => {
+      clearTimeout(timer);
+      console.log("[cockpit.js] clean up work in useEffect");
+    };
   }, []);
 
   //[props.persons] == when the prsons will change.
   //[] == pass empty array (if you want to use for the frst time)
+
+  useEffect(() => {
+    console.log("[cockpit.js] 2nd useEffect");
+    return () => {
+      console.log("[cockpit.js] clean up work 2nd useeffect");
+    };
+  });
 
   const assignedClasses = [];
   let btnClass = " ";
