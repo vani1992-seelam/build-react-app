@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import classes from "./App.css";
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
@@ -6,13 +7,14 @@ import Cockpit from "../components/Cockpit/Cockpit";
 class App extends Component {
   constructor(props) {
     super(props);
-    console.log("[App.js ] Constructor");
+    console.log("[App.js] constructor");
   }
+
   state = {
     persons: [
-      { id: "abcd1", name: "Roni", age: 27 },
-      { id: "abcd2", name: "Tommy", age: 4 },
-      { id: "abcd3", name: "Ivans", age: 28 }
+      { id: "asfa1", name: "Roni", age: 28 },
+      { id: "vasdf1", name: "Tommy", age: 29 },
+      { id: "asdf11", name: "Ivans", age: 26 }
     ],
     otherState: "some other value",
     showPersons: false,
@@ -20,55 +22,48 @@ class App extends Component {
   };
 
   static getDerivedStateFromProps(props, state) {
-    console.log("[App.js ] getDerivedStateFromProps", props);
+    console.log("[App.js] getDerivedStateFromProps", props);
     return state;
   }
 
   // componentWillMount() {
-  //   console.log("[App.js ] componentWillMount");
+  //   console.log('[App.js] componentWillMount');
   // }
 
   componentDidMount() {
-    console.log("[App.js ] componentDidMount");
+    console.log("[App.js] componentDidMount");
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log("[App.js ] shouldComponentUpdate");
+    console.log("[App.js] shouldComponentUpdate");
     return true;
   }
 
   componentDidUpdate() {
-    console.log("[App.js ] componentDidUpdate");
+    console.log("[App.js] componentDidUpdate");
   }
 
-  switchNameHandler = newName => {
-    //console.log("Clicked!!!");
-    this.setState({
-      persons: [
-        { name: newName, age: 27 },
-        { name: "Tommy", age: 4 },
-        { name: "Ivans", age: 43 }
-      ]
-    });
-  };
-
   nameChangedHandler = (event, id) => {
-    const personIndex = this.state.persons.findIndex(per => per.id === id);
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
 
-    const person = { ...this.state.persons[personIndex] };
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+
+    // const person = Object.assign({}, this.state.persons[personIndex]);
 
     person.name = event.target.value;
 
     const persons = [...this.state.persons];
     persons[personIndex] = person;
 
-    this.setState({
-      persons: persons
-    });
+    this.setState({ persons: persons });
   };
 
   deletePersonHandler = personIndex => {
-    //const persons = this.state.Persons;
+    // const persons = this.state.persons.slice();
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({ persons: persons });
@@ -80,8 +75,9 @@ class App extends Component {
   };
 
   render() {
-    console.log("[App.js ] render");
+    console.log("[App.js] render");
     let persons = null;
+
     if (this.state.showPersons) {
       persons = (
         <Persons
@@ -99,19 +95,20 @@ class App extends Component {
             this.setState({ showCockpit: false });
           }}
         >
-          Remove Button
+          Remove Cockpit
         </button>
         {this.state.showCockpit ? (
           <Cockpit
             title={this.props.appTitle}
             showPersons={this.state.showPersons}
-            persons={this.state.persons}
+            personsLength={this.state.persons.length}
             clicked={this.togglePersonsHandler}
           />
         ) : null}
         {persons}
       </div>
     );
+    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
 }
 
